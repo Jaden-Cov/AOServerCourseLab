@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--
+      Author:  Jaden Covington
+      Date:    02/11/2026
+      Purpose: This exercise demonstrates using pop-up windows in JavaScript.
+               When the user clicks a button, a new window opens and displays
+               either an addition or multiplication table from 0 to 10.
+   -->
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Pop-Up Windows</title>
+
+   <style>
+      body { margin: 20px; }
+      header h1 {
+         font-family: Georgia, "Times New Roman", serif;
+         font-size: 40px;
+         font-weight: 700;
+         margin: 0 0 18px 0;
+      }
+      button {
+         font-family: Arial, sans-serif;
+         font-size: 14px;
+         padding: 4px 10px;
+         margin-right: 8px;
+      }
+   </style>
+</head>
+
+<body>
+   <header>
+      <h1>Jaden Covington, Pop-Up Windows</h1>
+   </header>
+
+
+   <!-- Required buttons -->
+   <button id="addBtn" type="button">Addition Table</button>
+   <button id="multBtn" type="button">Multiplication Table</button>
+
+   <script>
+      /*
+         Purpose: Open the secondary window "MathTableDisplay.html" and pass
+                  which table to display using the query string.
+      */
+
+      function openTable(type) {
+         window.open(
+            "MathTableDisplay.html?type=" + type + "&name=" + encodeURIComponent("Jaden Covington"),
+            "MathTableDisplay",
+            "width=820,height=650,scrollbars=yes,resizable=yes"
+         );
+      }
+
+      document.getElementById("addBtn").addEventListener("click", function () {
+         openTable("add");
+      });
+
+      document.getElementById("multBtn").addEventListener("click", function () {
+         openTable("mult");
+      });
+   </script>
+</body>
+</html>

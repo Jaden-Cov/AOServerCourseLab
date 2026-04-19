@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+  Author: Jaden Covington
+  Date: 02/17/2026 
+  Purpose:
+  This exercise practices using cookies to track how many times a user visits a webpage.
+ -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Counting Visits</title>
+
+  <style>
+    body { font-family: Georgia, "Times New Roman", serif; margin: 24px; }
+    h1 { margin: 0 0 12px; font-size: 40px; }
+    p { margin: 8px 0; font-size: 16px; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Jadcov6623, Counting Visits</h1>
+  </header>
+
+  <main>
+    <p id="visitMessage"></p>
+    <p id="lastVisitMessage"></p>
+  </main>
+
+  <script>
+    "use strict";
+
+    function getCookie(name) {
+      const cookies = document.cookie ? document.cookie.split("; ") : [];
+      for (let i = 0; i < cookies.length; i++) {
+        const parts = cookies[i].split("=");
+        const cookieName = parts.shift();
+        const cookieValue = parts.join("=");
+        if (cookieName === name) {
+          return decodeURIComponent(cookieValue);
+        }
+      }
+      return null;
+    }
+
+    function setCookie(name, value, days) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = name + "=" + encodeURIComponent(value) +
+        "; expires=" + d.toUTCString() + "; path=/";
+    }
+
+    function formatVisitDate(dateObj) {
+      // Example: Tuesday 2/17/2026 at 5:46:57 PM
+      const day = dateObj.toLocaleDateString(undefined, { weekday: "long" });
+      const date = dateObj.toLocaleDateString();
+      const time = dateObj.toLocaleTimeString();
+      return `${day} ${date} at ${time}`;
+    }
+
+    (function () {
+      const visitMsg = document.getElementById("visitMessage");
+      const lastVisitMsg = document.getElementById("lastVisitMessage");
+
+      // Cookie will store: count|previousVisitString
+      const stored = getCookie("visitinfo");
+
+      let count = 0;
+      let prevVisitString = "";
+
+      if (stored) {
+        const parts = stored.split("|");
+        count = parseInt(parts[0], 10);
+        prevVisitString = parts.slice(1).join("|"); // in case date string contains "|"
+        if (isNaN(count)) count = 0;
+      }
+
+      // First visit vs returning visit
+      if (!stored || count === 0) {
+        visitMsg.textContent = "Welcome! This is your first visit to the webpage.";
+        lastVisitMsg.textContent = "";
+        count = 1;
+      } else {
+        count = count + 1;
+        visitMsg.textContent = "Your name, you have visited this page " + count + " times.";
+        lastVisitMsg.textContent = "Your last visit was " + prevVisitString + ".";
+      }
+
+      // Save NEW cookie value for next refresh (store current time as "previous" next time)
+      const nowString = formatVisitDate(new Date());
+      setCookie("visitinfo", count + "|" + nowString, 30);
+    })();
+  </script>
+</body>
+</html>

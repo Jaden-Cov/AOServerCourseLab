@@ -1,0 +1,46 @@
+body {
+  width: 960px;
+  margin: 0 auto;
+  font-family: Verdana, Geneva, sans-serif;
+  background: white;
+}
+
+/* purple header */
+header {
+  background: #330570;
+  color: #fff;
+  text-align: center;
+  font-size: 48px;
+  line-height: 1.5em;
+}
+
+/* yellow main area - works whether you used article OR section */
+article, section, main, .content {
+  background: #FFCF40 !important;
+  padding: 15px;
+  min-height: 250px;
+}
+
+/* heading */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+/* simple form layout */
+label {
+  display: block;
+  font-size: 1.4em;
+  margin: 8px 0;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+input[type="button"], button {
+  margin-top: 12px;
+  padding: 6px 12px;
+  font-size: 1em;
+}

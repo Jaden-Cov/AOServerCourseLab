@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--
+      Author:  Jaden Covington
+      Date:    02/11/2026
+      Purpose: This page is opened in a pop-up window. It reads the user's
+               selection (addition or multiplication) and generates a table
+               from 0 to 10 based on that selection.
+   -->
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Math Table Display</title>
+
+   <style>
+      body { margin: 20px; }
+
+      header h1 {
+         font-family: Georgia, "Times New Roman", serif;
+         font-size: 40px;
+         font-weight: 700;
+         margin: 0 0 18px 0;
+      }
+
+      table {
+         border-collapse: separate;     
+         border-spacing: 2px;           
+         font-family: Arial, sans-serif;
+         font-size: 14px;
+      }
+
+      th, td {
+         border: 1px solid #333;
+         padding: 3px 8px;
+         text-align: center;
+         min-width: 24px;
+      }
+
+      th {
+         font-weight: 700;
+      }
+   </style>
+</head>
+
+<body>
+   <header>
+      <h1 id="popupTitle">Math Table</h1>
+   </header>
+
+   <div id="tableContainer"></div>
+
+   <script>
+      /*
+         Purpose: Read the query string and generate the correct 0–10 table.
+      */
+
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get("type"); // "add" or "mult"
+      const userName = params.get("name") ? decodeURIComponent(params.get("name")) : "Your Name";
+
+      const titleEl = document.getElementById("popupTitle");
+      const container = document.getElementById("tableContainer");
+
+      // Decide operation
+      let titleText = "";
+      let compute = null;
+
+      if (type === "add") {
+         titleText = userName + ", Addition Table";
+         compute = (r, c) => r + c;
+      } else {
+         titleText = userName + ", Multiplication Table";
+         compute = (r, c) => r * c;
+      }
+
+      // Header containing the name of the button selected
+      titleEl.textContent = titleText;
+
+      // Build the table (0 to 10)
+      let html = "<table>";
+
+      // Top header row
+      html += "<tr><th></th>";
+      for (let c = 0; c <= 10; c++) {
+         html += "<th>" + c + "</th>";
+      }
+      html += "</tr>";
+
+      // Remaining rows
+      for (let r = 0; r <= 10; r++) {
+         html += "<tr>";
+         html += "<th>" + r + "</th>";
+
+         for (let c = 0; c <= 10; c++) {
+            html += "<td>" + compute(r, c) + "</td>";
+         }
+
+         html += "</tr>";
+      }
+
+      html += "</table>";
+      container.innerHTML = html;
+   </script>
+</body>
+</html>

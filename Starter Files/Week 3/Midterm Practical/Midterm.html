@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--
+      Assignment: Target Heart Rate
+      Name: Jaden Covington
+      Date: 02/11/2026
+      Purpose: This webpage calculates a user's target heart rate range (50% to 85%)
+               based on the user's age using the formula maxHR = 220 - age.
+   -->
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Target Heart Rate</title>
+
+   <style>
+      body { font-family: Georgia, "Times New Roman", serif; margin: 30px; }
+      .card {
+         width: 720px;
+         border: 1px solid #ddd;
+         box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+         padding: 20px 24px;
+      }
+      h1 {
+         margin: 0 0 18px 0;
+         font-size: 42px;
+         font-weight: 700;
+      }
+      .row {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         margin-bottom: 18px;
+         font-family: Arial, sans-serif;
+      }
+      label { font-size: 16px; }
+      input[type="text"] {
+         width: 220px;
+         padding: 6px 8px;
+         font-size: 14px;
+      }
+      button {
+         padding: 6px 10px;
+         font-size: 14px;
+         cursor: pointer;
+      }
+      #output {
+         font-family: Arial, sans-serif;
+         font-size: 16px;
+         margin-top: 6px;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="card">
+      <header>
+         <h1>Jaden Covington, Target Heart Rate</h1>
+      </header>
+
+      <div class="row">
+         <label for="ageInput">Your Age</label>
+         <input type="text" id="ageInput" />
+         <button type="button" onclick="calcTHR()">Calculate Target Heart Rate</button>
+      </div>
+
+      <div id="output">Target Heart Rate:</div>
+   </div>
+
+   <script>
+      /*
+         Function: calcTHR()
+         Purpose: Validate the age, calculate max heart rate, then compute
+                  min and max target heart rates (50% and 85%), and display results.
+      */
+      function calcTHR() {
+         // Get user input and convert to a number
+         let age = Number(document.getElementById("ageInput").value);
+
+         // Validate age range
+         if (isNaN(age) || age < 0 || age > 125) {
+            alert("Please enter a valid age between 0 and 125.");
+            return; // Stop further calculations
+         }
+
+         // Calculate max heart rate
+         let maxHR = 220 - age;
+
+         // Calculate target range
+         let minTHR = Math.floor(maxHR * 0.5);
+         let maxTHR = Math.floor(maxHR * 0.85);
+
+         // Display formatted output
+         document.getElementById("output").textContent =
+            "Target Heart Rate: " + minTHR + " to " + maxTHR + " Beats Per Minute";
+      }
+   </script>
+</body>
+</html>
