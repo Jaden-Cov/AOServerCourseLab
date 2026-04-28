@@ -1,0 +1,18 @@
+USE sdc310_Covington;
+
+UPDATE users
+SET FName = 'Emma'
+WHERE UserNo = 3;
+
+UPDATE products
+SET ProductName = 'Gaming Mouse'
+WHERE ProductNo = 2;
+
+DELETE FROM users
+WHERE UserNo = 4;
+
+DELETE FROM products
+WHERE ProductNo = 5;
+
+SELECT * FROM users;
+SELECT * FROM products;

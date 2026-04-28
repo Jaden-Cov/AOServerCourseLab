@@ -1,0 +1,20 @@
+USE sdc310_Covington;
+
+INSERT INTO users (UserNo, UserId, LName, FName)
+VALUES
+(1, 'jadcov6623', 'Covington', 'Jaden'),
+(2, 'user1002', 'Smith', 'John'),
+(3, 'user1003', 'Johnson', 'Emily'),
+(4, 'user1004', 'Brown', 'Michael'),
+(5, 'user1005', 'Davis', 'Sarah');
+
+INSERT INTO products (ProductNo, ProductId, ProductName, ProductDescription)
+VALUES
+(1, 'P1001', 'Laptop', '15-inch business laptop'),
+(2, 'P1002', 'Mouse', 'Wireless optical mouse'),
+(3, 'P1003', 'Keyboard', 'Mechanical USB keyboard'),
+(4, 'P1004', 'Monitor', '24-inch LED monitor'),
+(5, 'P1005', 'Printer', 'All-in-one inkjet printer');
+
+SELECT * FROM users;
+SELECT * FROM products;
